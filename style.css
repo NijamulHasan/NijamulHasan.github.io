@@ -24,6 +24,45 @@ img{
 
 /*----------Insider of Nav Style----------*/
 
+.result_popup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    background-image: radial-gradient(circle at center center, transparent,rgb(33,33,33)),repeating-linear-gradient(135deg, rgb(33,33,33) 0px, rgb(33,33,33) 2px,transparent 2px, transparent 10px,rgb(33,33,33) 10px, rgb(33,33,33) 11px,transparent 11px, transparent 21px),repeating-linear-gradient(45deg, rgb(47,47,47) 0px, rgb(47,47,47) 4px,transparent 4px, transparent 8px),linear-gradient(90deg, rgb(33,33,33),rgb(33,33,33));
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 10px;
+    outline: 4px solid #fff;
+    outline-offset: -8px;
+    z-index: 1;
+}
+.result_popup h2{
+    text-align: center;
+    text-decoration: underline;
+}
+.result_popup table{
+    width: 100%;
+}
+.result_popup table th, .result_popup table td{
+    padding: 10px 10px;
+}
+.result_popup button{
+    margin-top: 20px;
+    border: none;
+    outline: 2px solid #fff;
+    outline-offset: -4px;
+    background-image: repeating-linear-gradient(45deg, rgb(80, 80, 80) 0px, rgb(80, 80, 80) 14px,rgb(81, 81, 81) 14px, rgb(81, 81, 81) 28px,rgb(86, 86, 86) 28px, rgb(86, 86, 86) 42px,rgb(83, 83, 83) 42px, rgb(83, 83, 83) 56px,rgb(82, 82, 82) 56px, rgb(82, 82, 82) 70px,rgb(88, 88, 88) 70px, rgb(88, 88, 88) 84px,rgb(85, 85, 85) 84px, rgb(85, 85, 85) 98px,rgb(87, 87, 87) 98px, rgb(87, 87, 87) 112px);
+    border-radius: 5px;
+}
+.result_popup button a{
+    font-weight: 700;
+    font-size: 18px;
+    padding: 5px 100px;
+    display: inline-block;
+}
 nav{
     background: #D72A5A;
     color: #bbffd9;
@@ -62,20 +101,30 @@ nav p{
 }
 .dropdown{
     position: absolute;
-    bottom: -73px;
+    top: 55px;
     right: 15px;
     background: rgba(0, 0, 0, 0.5);
     display: inline-block;
+}
+.dropdown button{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 7px 25px;
+    display: block;
+}
+.dropdown a{
+    padding: 7px 25px;
+    display: block;
 }
 .hidden{
     display: none;
 }
 .visible{
-    display: inline-block;
-}
-.dropdown a{
-    padding: 7px 25px;
-    display: inline-block;
+    display: block;
 }
 /*----------UI Style----------*/
 .moves_box{
@@ -125,6 +174,7 @@ nav p{
     text-align: center;
     font-weight: 700;
     font-size: 18px;
+    color: #fff;
 }
 /*----------Moves Button-(rock, paper, scissors) Style----------*/
 .input_box{
@@ -147,6 +197,71 @@ nav p{
     border-radius: 15px;
     color: #fff;
     text-align: center;
-    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.06),transparent,rgba(0,0,0,0.08),rgba(0,0,0,0.1),rgba(0,0,0,0.1),rgba(0,0,0,0.06),rgba(0,0,0,0.04),transparent,rgba(0,0,0,0.07),rgba(0,0,0,0.06),rgba(0,0,0,0.1) 3px),linear-gradient(90deg, rgb(73, 163, 71),rgb(116, 198, 33));
     padding: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+.green{
+    background-image: repeating-linear-gradient(-135deg, rgba(0,0,0,0.06),transparent,rgba(0,0,0,0.08),rgba(0,0,0,0.1),rgba(0,0,0,0.1),rgba(0,0,0,0.06),rgba(0,0,0,0.04),transparent,rgba(0,0,0,0.07),rgba(0,0,0,0.06),rgba(0,0,0,0.1) 3px),linear-gradient(90deg, rgb(73, 163, 71),rgb(116, 198, 33));
+}
+.red{
+    background-image: repeating-linear-gradient(-135deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 2px,transparent 2px, transparent 4px),linear-gradient(45deg, rgb(223, 43, 1),rgb(202, 124, 12));
+}
+.blue{
+    background-image: repeating-linear-gradient(-135deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 2px,transparent 2px, transparent 4px),linear-gradient(0deg, rgb(30, 35, 121),rgb(45, 106, 187));
+}
+/*----------main menu or index page style along with the high score panal style----------*/
+.main_menu, .panal{
+    width: 280px;
+    margin: 50px auto;
+    text-align: center;
+    background-image: repeating-linear-gradient(45deg, rgb(223, 142, 17) 0px, rgb(223, 142, 17) 41px,rgb(221, 125, 11) 41px, rgb(221, 125, 11) 102px,rgb(225, 158, 23) 102px, rgb(225, 158, 23) 187px,rgb(227, 175, 29) 187px, rgb(227, 175, 29) 197px,rgb(229, 191, 35) 197px, rgb(229, 191, 35) 211px);
+    border-radius: 20px;
+    border: 4px solid #fff;
+    padding: 30px 0;
+}
+.main_menu h2, .panal h2{
+    text-decoration: underline;
+    color: #000;
+    margin-bottom: 15px;
+    font-weight: 800;
+    font-size: 24px
+}
+.main_menu button, .panal button{
+    width: 70%;
+    background-image: repeating-linear-gradient(135deg, rgb(118, 98, 243) 0px, rgb(118, 98, 243) 46px,rgb(61, 163, 245) 46px, rgb(61, 163, 245) 92px,rgb(107, 111, 244) 92px, rgb(107, 111, 244) 138px,rgb(72, 150, 244) 138px, rgb(72, 150, 244) 184px,rgb(95, 124, 244) 184px, rgb(95, 124, 244) 230px,rgb(49, 176, 245) 230px, rgb(49, 176, 245) 276px,rgb(130, 85, 243) 276px, rgb(130, 85, 243) 322px,rgb(84, 137, 244) 322px, rgb(84, 137, 244) 368px);
+    margin: 10px auto;
+    display: block;
+    border: 5px outset rgba(0, 0, 0, 0.5);
+    outline: 1px solid #000;
+    box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+}
+.main_menu button:nth-child(4){
+    display: inline-block;
+    margin-top: 0;
+    padding: 10px 0;
+    color: #000;
+    font-weight: 700;
+    font-size: 18px;
+}
+.main_menu button:hover, .panal button:hover{
+    border: 5px inset rgba(0, 0, 0, 0.5);
+    box-shadow: none;
+}
+.main_menu a, .panal a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    color: #000;
+    font-weight: 700;
+    font-size: 18px;
+}
+.panal p{
+    font-weight: 700;
+    font-size: 18px;
+
 }
