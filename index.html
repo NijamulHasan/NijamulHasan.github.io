@@ -5,49 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="Paper.png">
+    <title>Rock Paper Scissor - Mainmenu</title>
 </head>
 <body>
-    <nav>
-        <div class="score">
-            <p>Score : 03</p>
-        </div>
-        <div class="rounds">
-            <p>Round : 03</p>
-        </div>
-        <div class="links">
-            <button><i class="fa-solid fa-bars"></i></button>
-        </div>
-        <div class="dropdown hidden">
-            <ul>
-                <li><a href="rules.html">Rules</a></li>
-                <hr>
-                <li><a href="mainmenu.html">Exit</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="moves_box">
-        <div class="user">
-            <div class="img_move img1">
-            </div>
-            <div class="noun">You</div>
-        </div>
-        <div class="VS">
-            <h1>VS</h1>
-        </div>
-        <div class="computer">
-            <div class="img_move img2">
-            </div>
-            <div class="noun">Computer</div>
-        </div>
-    </div>
-    <div class="input_box">
-        <button class="inp_btn i1"><img src="Rock.png" alt="Rock"></button>
-        <button class="inp_btn i2"><img src="Paper.png" alt="Paper"></button>
-        <button class="inp_btn i3"><img src="Scissor.png" alt="Scissor"></button>
-    </div>
-    <div class="status">
-        <p>YOU WIN or LOSE</p>
+    <div class="main_menu">
+        <h2>Main Menu</h2>
+        <button><a href="game.html">Play</a></button>
+        <button><a href="highscore.html">High Score</a></button>
+        <button onclick="goToRules('index.html')">Rules</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="index.js"></script>
