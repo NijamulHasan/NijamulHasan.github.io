@@ -1,80 +1,64 @@
-/*// Rock Paper Ceaser Game
+// Rock Paper Scissor Game
 
-let points_u = 0;
-let points_cpu = 0;
-const arr = ["rock", "paper", "ceaser"];
+// --- Global Redirection Functions ---
+window.goToRules = function(fromPage) {
+    window.location.href = "rules.html";
+};
 
-let Start = ()=>{
-    let userInput = prompt("take rock, paper or ceaser");
-    let otherInp = Math.floor(Math.random() * 3);
-
-    if (arr[otherInp] == userInput) {
-        console.log("you get 1 point");
-        points_u++;
-        points_cpu++;
-    }else if(userInput != arr[otherInp]){
-        if (userInput == "rock" && arr[otherInp] == "paper") {
-            console.log("you get 0 point");
-            points_cpu += 2;
-        }else if(userInput == "rock" && arr[otherInp] == "ceaser"){
-            console.log("you get 2 points");
-            points_u += 2;
-        }else if(userInput == "paper" && arr[otherInp] == "rock"){
-            console.log("you get 2 points");
-            points_u += 2;
-        }else if(userInput == "paper" && arr[otherInp] == "ceaser"){
-            console.log("you get 0 point");
-            points_cpu += 2;
-        }else if(userInput == "ceaser" && arr[otherInp] == "rock"){
-            console.log("you get 0 point");
-            points_cpu += 2;
-        }else if(userInput == "ceaser" && arr[otherInp] == "paper"){
-            console.log("you get 2 points");
-            points_u += 2;
-        }
-    }else{
-        console.log("Please take only between rock, paper and ceaser and all cases should be in lowwer");
+window.goBack = function() {
+    const cameFrom = sessionStorage.getItem("cameFrom");
+    if (cameFrom) {
+        window.location.href = cameFrom;
+    } else {
+        window.location.href = "index.html";
     }
 }
-let Result = ()=>{
-    return (points_u > points_cpu)? true : false;
-}
+// --- End Global Redirection Functions ---
 
-// Game starts here
+$(document).ready(function () {
+    let score_text = document.querySelector(".scr");
+    let round_text = document.querySelector(".rnd");
 
-alert("Welcome to the game");
+    if (!score_text || !round_text) return; // Stop if not on game page
 
-if (confirm("Do you want to play match?")) {
-    console.clear();
-    for(let i = 0; i < 5; i++){
-        Start();
-    }
-    if (Result()) {
-        console.log("You Win");
-    }else{
-        console.log("You Lose");
-    }
-}
-*/$(document).ready(function () {
+    $(".status").slideUp(0);
+    $(".result_popup").hide(); // Always hide result popup at start
+
+    let round = 1;
+    // User vars
+    let score = 0;
+    let win = 0;
+    let lose = 0;
+    let draw = 0;
+
+    // Computer vars
+    let score_cpu = 0;
+    let win_cpu = 0;
+    let lose_cpu = 0;
+    let draw_cpu = 0;
+
+    let status;
+    let otherInp;
+    
+    const arr = ["rock", "paper", "scissor"];
 
     // Toggle dropdown
     $(".links button").click(() => {
-        $(".dropdown").toggleClass("hidden visible");
+        $(".dropdown").slideToggle(50);
     });
 
-    // Remove current user move
+    // Remove classes from user move
     let remove = () => {
         $(".img1").removeClass("visible_rock visible_paper visible_scissor");
     };
 
-    // Add user move
+    // Add classes to user move
     let add = (img, cls) => {
         $(img).addClass(cls);
     };
 
-    // Computer move
+    // Add classes to Computer move
     let computer_move = () => {
-        let otherInp = Math.floor(Math.random() * 3);
         $(".img2").removeClass("visible_rock visible_paper visible_scissor");
 
         if (otherInp === 0) {
@@ -86,24 +70,109 @@ if (confirm("Do you want to play match?")) {
         }
     };
 
-    // User click events
+    // Changing the text of rounds and score
+    let Update_UI = () => {
+        score_text.innerHTML = `Score : ${score}`;
+        setTimeout(() => {
+            if (round == 6) {
+                round_text.innerHTML = `Round : 5`;
+            } else {
+                round_text.innerHTML = `Round : ${round}`;
+            }
+        }, 1500);
+    };
+
+    // Win, Lose or Draw conditions
+    let Comparison = (user_input) => {
+        let userInput = user_input;
+        otherInp = Math.floor(Math.random() * 3);
+
+        if (arr[otherInp] === userInput) {
+            score++;
+            score_cpu++;
+            status = 0;
+        } else if (
+            (userInput === "rock" && arr[otherInp] === "scissor") ||
+            (userInput === "paper" && arr[otherInp] === "rock") ||
+            (userInput === "scissor" && arr[otherInp] === "paper")
+        ) {
+            score += 2;
+            status = 1;
+        } else {
+            score_cpu += 2;
+            status = -1;
+        }
+
+        round++;
+        Update_UI();
+
+        $(".status").removeClass("red green blue");
+        if (status == 1) {
+            $(".status").addClass("green").html("YOU WIN");
+            win++;
+            lose_cpu++;
+        }
+        if (status == -1) {
+            $(".status").addClass("red").html("YOU LOSE");
+            lose++;
+            win_cpu++;
+        }
+        if (status == 0) {
+            $(".status").addClass("blue").html("DRAW");
+            draw++;
+            draw_cpu++;
+        }
+
+        if (round > 5) {
+            $(".result_popup").fadeIn(300);
+            $(".result_popup td").eq(1).text(win);
+            $(".result_popup td").eq(2).text(win_cpu);
+            $(".result_popup td").eq(4).text(lose);
+            $(".result_popup td").eq(5).text(lose_cpu);
+            $(".result_popup td").eq(7).text(draw);
+            $(".result_popup td").eq(8).text(draw_cpu);
+            $(".result_popup td").eq(10).text(score);
+            $(".result_popup td").eq(11).text(score_cpu);
+
+            $(".i1, .i2, .i3").prop("disabled", true);
+
+            let storedHigh = localStorage.getItem("high_score");
+            if (!storedHigh || score > parseInt(storedHigh)) {
+                localStorage.setItem("high_score", score);
+            }
+        }
+
+        $(".i1, .i2, .i3").css("pointer-events", "none");
+        $(".status").slideDown(100);
+
+        setTimeout(() => {
+            $(".status").slideUp(100);
+            $(".i1, .i2, .i3").css("pointer-events", "auto");
+        }, 1500);
+    };
+
+    // -------------------User click events-------------------
     $(".i1").click(function () {
         remove();
         add(".img1", "visible_rock");
+        Comparison(arr[0]);
         computer_move();
     });
 
     $(".i2").click(function () {
         remove();
         add(".img1", "visible_paper");
+        Comparison(arr[1]);
         computer_move();
     });
 
     $(".i3").click(function () {
         remove();
         add(".img1", "visible_scissor");
+        Comparison(arr[2]);
         computer_move();
     });
 
-    console.log("JS loaded");
+    // Initial UI update
+    Update_UI();
 });
